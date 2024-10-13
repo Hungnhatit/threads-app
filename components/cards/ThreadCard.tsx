@@ -19,10 +19,8 @@ interface Props {
   } | null,
   createdAt: string,
   comments: {
-    author: {
-      image: string
-    }
-  } | [],
+    author: { image: string }
+  }[],
   isComment?: boolean
 }
 
@@ -69,6 +67,7 @@ const ThreadCard = ({
             </Link>
             <p className='mt-2 text-small-regular text-light-2'>{content}</p>
 
+            {/* Thread Action Section */}
             <div className='mt-5 flex flex-col gap-3'>
               <div className='flex gap-3.5'>
                 <Image src="/assets/heart-gray.svg" alt="heart" width={24} height={24} className='cursor-pointer object-contain'></Image>
@@ -78,6 +77,17 @@ const ThreadCard = ({
                 <Image src="/assets/repost.svg" alt="repost" width={24} height={24} className='cursor-pointer object-contain'></Image>
                 <Image src="/assets/share.svg" alt="share" width={24} height={24} className='cursor-pointer object-contain'></Image>
               </div>
+
+              {isComment && comments.length > 0 && (
+                <Link href={`/thread/${id}`}>
+                  <p className='mt-1 text-subtle-medium text-gray-1'>
+                    {comments.length} replies
+                  </p>
+                </Link>
+              )}
+
+
+
             </div>
 
           </div>
