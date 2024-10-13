@@ -24,6 +24,7 @@ import { isBase64Image } from '@/lib/utils';
 import { useUploadThing } from '@/lib/uploadthing';
 import { updateUser } from '@/lib/actions/user.action';
 import { ThreadValidation } from '@/lib/validations/thread';
+import { createThread } from '@/lib/actions/thread.action';
 
 interface Props {
   user: {
@@ -38,10 +39,10 @@ interface Props {
 };
 
 // -------------< Main function >------------
-//PostThread nhận userId dưới dạng props
+// PostThread nhận userId dưới dạng props
 function PostThread({ userId }: { userId: string }) {
-  const [files, setFiles] = useState<File[]>([]);
-  const { startUpload } = useUploadThing("media");
+  const router = useRouter();
+  const pathname = usePathname();
 
 
   const form = useForm({
@@ -54,8 +55,14 @@ function PostThread({ userId }: { userId: string }) {
   });
 
 
-  const onSubmit =async () => {
-
+  const onSubmit = async (values: z.infer<typeof ThreadValidation>) => {
+    await createThread({
+      text: values.thread,
+      author: userId,
+      communityId: null,
+      path: pathname,
+    });
+    router.push("/");
   }
 
 
@@ -93,10 +100,10 @@ function PostThread({ userId }: { userId: string }) {
 
 
 
-          <button
+          <Button
             type="submit"
             className="bg-primary-500"
-          >Post Thread</button>
+          >Post Thread</Button>
         </form>
 
 
