@@ -19,7 +19,7 @@ const threadSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
   },
 
-  // One thread can have multiple threads as children
+  // Comment - One thread can have multiple threads as children
   children: [
     {
       type: mongoose.Schema.Types.ObjectId,
