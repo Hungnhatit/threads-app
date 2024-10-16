@@ -14,7 +14,6 @@ async function Page() {
     redirect('/onboarding');
   }
 
-
   return (
     <>
       <h1 className="head-text">
