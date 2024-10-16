@@ -9,7 +9,6 @@ import { redirect } from "next/navigation";
 const Page = async ({ params }: { params: { id: string } }) => {
   if (!params.id) return null;
 
-
   // Get current user
   const user = await currentUser();
 
