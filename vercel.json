@@ -1,21 +1,23 @@
 {
   "version": 2,
-  "builds": [{
-      "src": "server.js",
-      "use": "@vercel/node"
-    },
+
+  "name": "threads-app",
+
+  "builds": [
+
     {
-      "src": "src",
-      "use": "@vercel/static-build"
+      "src": "app.js",
+      "use": "@vercel/node"
     }
+
   ],
-  "routes": [{
-      "src": "/api/(.*)",
-      "dest": "server.js"
-    },
+
+  "routes": [
+
     {
       "src": "/(.*)",
-      "dest": "/src/$1"
+      "dest": "/app.js"
     }
+
   ]
 }
